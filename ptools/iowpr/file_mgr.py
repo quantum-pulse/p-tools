@@ -9,7 +9,7 @@ import json
 """
 class that handles json & text files 
 
-read & write methods
+read & write, etc ... methods
 """
 class file_mgr:
     def __init__(self):
@@ -18,7 +18,7 @@ class file_mgr:
     def read(self, _filename):
         """ reads text,csv files 
         parameter:
-           filename  
+           file name  
             
         return:
            a list the contains the file's content 
@@ -42,11 +42,31 @@ class file_mgr:
     def readjson(self,_json):
         """ reads json files
             parameter:
-               list of strings to be dumped into a file    
+               name of json file    
             return:
                 a dictionnary that contains the json file's content
         """
         l_data=None
-        with open(_json) as json_data:
+        with open(_json,'r') as json_data:
             l_data = json.load(json_data)
         return l_data
+
+    def is_file(self,_filename):
+        """ check if object is a file 
+            parameter:
+               file name    
+            
+            return:
+                a dictionnary that contains the json file's content
+        """
+        return os.path.is_file(_filename)
+
+    def rid(self,_filename):
+        """ removes file
+            parameter:
+               file name
+            return:
+                none
+        """
+        if(self.is_file(_filename)):
+            os.remove(_filename)
