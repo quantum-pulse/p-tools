@@ -1,0 +1,7 @@
+{
+"langage":"cxx",
+"compiler":"clang++-14",
+"debugger":"gdb",
+"dep":["curl",
+      "pthread"]
+}
