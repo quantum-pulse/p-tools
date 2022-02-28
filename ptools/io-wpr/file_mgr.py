@@ -21,7 +21,7 @@ class file_mgr:
            filename  
             
         return:
-           file splitted in a list
+           a list the contains the file's content 
         """ 
         l_file = open(_filename,"r")
         l_bufferlist = l_file.readlines()
@@ -44,7 +44,7 @@ class file_mgr:
             parameter:
                list of strings to be dumped into a file    
             return:
-                a dictionnary that contains the content of json file 
+                a dictionnary that contains the json file's content
         """
         l_data=None
         with open(_json) as json_data:
