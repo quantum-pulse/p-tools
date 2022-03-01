@@ -6,7 +6,8 @@
 this a bundle of libraries usefull to develop script to automate tasks
 
 #### Dependencies
-- pytest 
+- pytest
+- pytest-html
 - unittest
 
 #### set the environment to launch executable or test
@@ -18,11 +19,14 @@ this a bundle of libraries usefull to develop script to automate tasks
 #### Run tests
 > run the following command line:
 ```
- pytest tests 
+ pytest tests
 
 ```
+>remark: in the current context. tests is the name the directory that contains all the different tests
+#### Run tests and generate html report
+> run the following command line:
+```
+ pytest -v tests --html=tests_report.html --self-contained-html
 
 ```
-> documentation in progress
-
-```
+> remark: the html report will be generated in the directory of execution
