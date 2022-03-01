@@ -21,7 +21,7 @@ class test_file_mgr(unittest.TestCase):
 
     def test_write(self):
         """
-        Tests if the write is correctly wrapped 
+        Tests if the write method is correctly wrapped 
         """
         l_list_buffer=["running writing test\n","for the file manager\n"]
         self.fmgr.write("temp/temp_buffer.txt",l_list_buffer)
@@ -33,12 +33,10 @@ class test_file_mgr(unittest.TestCase):
 
     def test_readjson(self):
         """
-        Tests if the write is correctly wrapped 
+        Tests if the read json method is correctly wrapped 
         """
         l_json_file=self.fmgr.readjson("rc/langage.json")
-        
         fields=[ field for field in l_json_file.keys()]
-        
         search= lambda value: l_json_file[value] if(l_json_file[value]) else None
 
         langage=search("langage")
@@ -48,6 +46,12 @@ class test_file_mgr(unittest.TestCase):
         self.assertEqual(langage,"cxx")
         self.assertEqual(compiler,"clang++-14")
         self.assertEqual(debugger,"gdb")
+
+    def test_is_file(self):
+        """
+        Tests if the object is a file
+        """
+        self.assertEqual(self.fmgr.is_file("rc/sample.txt"),True)
 
     def tearDown(self):
         self.dmgr.remove("temp")

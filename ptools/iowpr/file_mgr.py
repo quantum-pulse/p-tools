@@ -6,6 +6,7 @@
 # -----------------------------------------------------------
 
 import json
+import os
 """
 class that handles json & text files 
 
@@ -59,7 +60,7 @@ class file_mgr:
             return:
                 a dictionnary that contains the json file's content
         """
-        return os.path.is_file(_filename)
+        return os.path.isfile(_filename)
 
     def rid(self,_filename):
         """ removes file
