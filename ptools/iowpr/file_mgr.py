@@ -8,7 +8,7 @@
 import json
 import os
 """
-class that handles json & text files 
+Class that handles json & text files
 
 read & write, etc ... methods
 """

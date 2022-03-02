@@ -8,7 +8,7 @@
 import os
 import shutil
 """
-class that handles tasks related to read and write directories
+Class that handles tasks related to read and write directories
 
 creates, removes, etc ... methods
 """

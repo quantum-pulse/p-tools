@@ -1,0 +1,88 @@
+#! /usr/bin/python3.8
+
+import sys
+from ptools.iowpr.file_mgr import file_mgr as f_mgr
+
+g_fmgr=f_mgr()
+
+LINETOINSERT='\t\t#todo implement stub for unitary test\n'
+
+STARTIMPORT="import unittest\n"
+EMPTYLINE="\n"
+BEGINSTRCLASS="class test_"
+ENDSTRCLASS="(unittest.TestCase):\n"
+
+BEGINSTRDEF="\tdef test_"
+ENDSTRDEF="(self):\n"
+
+FILEBEGIN="test_"
+
+def helpMenu():
+    print ("missing argument")
+    print ("")
+
+def reconstruct_buffer(_buffer):
+    l_new_buffer=""
+    if("class" in _buffer):
+        b_index=_buffer.find(" ")
+        e_index=_buffer.find(":")
+        l_new_buffer=BEGINSTRCLASS+_buffer[b_index:e_index].strip()+ENDSTRCLASS
+        l_new_buffer=l_new_buffer+EMPTYLINE
+        print(l_new_buffer)
+    elif("def" in _buffer):
+        if(not "__init__" in _buffer):
+            #print("buffer -> "+_buffer)
+            b_index=_buffer.find("f ")
+            e_index=_buffer.find("(")
+            l_new_buffer=BEGINSTRDEF+_buffer[b_index+1:e_index].strip()+ENDSTRDEF
+            l_new_buffer=l_new_buffer+LINETOINSERT
+            print(l_new_buffer)
+    return l_new_buffer
+
+def parse_file(_filename):
+    l_file=g_fmgr.read(_filename)
+    l_buffers=[] 
+    for line in l_file:
+        if("class" in line):
+            l_buffers.append(reconstruct_buffer(line))
+        elif("def" in line):
+            l_buffers.append(reconstruct_buffer(line))
+    return "".join(l_buffers)
+#   
+#   we have on constrain. the script should be launched from the directory of execution
+#   1) gen_unit_tests -all
+#   2) gen_unit_tests file.py (file should be a class)
+#   3) gen_unit_tests file1.py file2.py file3.py file4.py
+#
+#todo once the script has been implemented sequentially -> implement it with a parallel pattern
+if __name__== "__main__":
+    if(len(sys.argv)==1):
+        helpMenu()
+    else:
+        #constructing the new file name
+        #print(sys.argv[1])
+        l_file_name=sys.argv[1]
+        index=l_file_name.rfind("/")
+        l_new_file_name=FILEBEGIN+l_file_name[index+1:]
+        #print(l_new_file_name)
+        
+        #we assume that the user is in the directory of execution
+        if("-all" in sys.argv):
+            for py_files in os.listdir():
+                parse_file(pyfiles)
+        else:
+            #implemetation of the header file
+            l_new_file=[]
+            l_new_file.append(STARTIMPORT)
+            l_new_file.append(EMPTYLINE)
+
+            if(len(sys.argv)-1==1):
+                l_new_file.append(parse_file(sys.argv[1]))
+                #print(l_new_file)
+                l_buffer="".join(l_new_file)
+                #print(l_buffer)
+                g_fmgr.write(l_new_file_name," ".join(l_new_file))
+            else:
+                l_source_files=sys.argv[1:]
+                for py_files in l_source_files:
+                    parse_file(py_files)
