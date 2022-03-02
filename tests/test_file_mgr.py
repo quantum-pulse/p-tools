@@ -53,5 +53,15 @@ class test_file_mgr(unittest.TestCase):
         """
         self.assertEqual(self.fmgr.is_file("rc/sample.txt"),True)
 
+    def test_rid(self):
+        """
+        Tests if the file has been removed
+        """
+        l_list_buffer=["fake content"]
+        self.fmgr.write("temp/fake_file.txt",l_list_buffer)
+        self.assertEqual(self.fmgr.is_file("temp/fake_file.txt"),True)
+        self.fmgr.rid("temp/fake_file.txt")
+        self.assertEqual(self.fmgr.is_file("temp/fake_file.txt"),False)
+
     def tearDown(self):
         self.dmgr.remove("temp")
