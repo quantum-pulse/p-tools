@@ -1,7 +1,7 @@
 # Ptools library (Python tools library)
 ## Bundle of python wrappers
 
-![](img/pytools.png)
+<img src="img/pytools.jpg" width="400" height="200">
 
 this a bundle of libraries usefull to develop script to automate tasks
 
